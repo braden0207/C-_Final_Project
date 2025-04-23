@@ -3,12 +3,15 @@ using System.Collections.Generic;
 
 class Program
 {
+    // -- Holds All the Books -- // 
     static List<Book> collection = new List<Book>();
 
     static void Main()
     {
+        // -- Runs Loop Until They Quit -- // 
         while (true)
         {
+            // -- Menu -- // 
             Console.WriteLine("\n--- Book Collection Manager ---");
             Console.WriteLine("1. Add Book");
             Console.WriteLine("2. View All Books");
@@ -17,6 +20,7 @@ class Program
             Console.Write("Choose an option: ");
             string choice = Console.ReadLine();
 
+            // -- Checks User Input for 1-4 -- // 
             switch (choice)
             {
                 case "1":
@@ -39,6 +43,7 @@ class Program
 
     static void AddBook()
     {
+        // -- Collect New Book Information -- // 
         Console.Write("Title: ");
         string title = Console.ReadLine();
 
@@ -51,30 +56,36 @@ class Program
         int pages = ValidateInt("Page Count (positive number): ");
         double rating = ValidateDouble("Rating (0-5): ");
 
+        // -- Adds New Book to Collection -- //
         Book book = new Book(title, author, genre, pages, rating);
         collection.Add(book);
         Console.WriteLine("Book added successfully!");
     }
 
+    // -- Check If Any Books -- //
     static void ViewBooks()
     {
+        // -- If No Books -- //
         if (collection.Count == 0)
         {
             Console.WriteLine("No books in collection.");
             return;
         }
 
+        // -- Loop Through Books (Print Summary) -- //
         foreach (Book book in collection)
         {
             Console.WriteLine(book.GetBookSummary());
         }
     }
 
+    // -- Asks Author Name -- //
     static void SearchByAuthor()
     {
         Console.Write("Enter author name to search: ");
         string author = Console.ReadLine().ToLower();
 
+        // -- Checks if Any Books Match -- // 
         foreach (Book book in collection)
         {
             if (book.Author.ToLower().Contains(author))
@@ -84,6 +95,7 @@ class Program
         }
     }
 
+    // -- Checks input Validation (int)-- // 
     static int ValidateInt(string prompt)
     {
         int value;
@@ -103,6 +115,7 @@ class Program
         }
     }
 
+    // -- Checks input Validation (double)-- // 
     static double ValidateDouble(string prompt)
     {
         double value;
